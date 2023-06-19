@@ -15,13 +15,12 @@
   + Variables, methods
   + Resources
 - Property
-- Khai báo biến số・Hằng số
-Kiểu 
-	Định nghĩa kiểu và suy luận kiểu
-Enums
-Closures
-Comments
-Errors
+- Kiểu 
+  + Định nghĩa kiểu và suy luận kiểu
+- Enum
+- Closure
+- Comment
+- Error
 
 1. Mục đích:
   - Đảm bảo tính nhất quán
@@ -190,3 +189,80 @@ Errors
       }
   }
 
+6. Kiểu
+  - Biến local thì suy luận kiểu
+  - Trường hợp cần biểu thị rõ như Float、CGFloat, v.v…thì định nghĩa type
+  Ví dụ:
+  GOOD:
+  	let name = "Sample"
+	let total = 100
+	let height: CGFloat = 30.0
+
+  BAD:
+  	let name: String = "Sample"
+	let total: Int = 100
+
+7. Enum
+	- Khi có thể lược bỏ type name thì phải lược bỏ
+	Ví dụ:
+	GOOD:
+	  user.status = .guest
+	 
+	 BAD:
+	   user.status = UserStatus.guest
+
+8. Closure
+  - Trường hợp chỉ có 1 closure là argument, thì phải sử dụng Trailing Closure
+  - Trường hợp argument là chỉ có 1 closure, thì phải lược bỏ ()
+  Ví dụ:
+  GOOD:
+  	UIView.animate(withDuration: 1.0) {
+	}
+
+	UIView.animate(withDuration: 1.0, animations: {
+	}, completion: { finished in
+	})
+
+	let titles = recipes.map { $0.title }
+  
+  BAD:
+  	UIView.animate(withDuration: 1.0, animations: {
+	})
+
+	UIView.animate(withDuration: 1.0, animations: {
+	}) { finished in
+	}
+
+	let titles = recipes.map { $0.title }
+	
+9. Comment
+  - Giải thích rõ mục đích, chức năng và logic một cách chính xác
+  - Luôn đảm bảo comment là mới nhất
+  - Tránh những giải thích không rõ ràng gây nhầm lẫn trong code
+  - Sử dụng // hoặc /// để mô tả comment
+  - Sử dụng MARK ở những block extension hoặc functions
+  Ví dụ:
+  GOOD:
+    /// This function provide a description for show on home screen
+	/// - Parameter: A boolean as input
+	/// - Return: A description
+	function getDescription(isMatching: Bool) -> String {
+		if isMatching {
+			return AppConstant.previousText
+		}
+	    return AppConstant.previousText + description
+	}
+
+	BAD:
+	// getDescription
+	function getDescription(isMatching: Bool) -> String {
+		if isMatching {
+			return AppConstant.previousText
+		}
+	    return AppConstant.previousText + description
+	}
+
+10. Error
+  - Thống nhất lỗi khi giao tiếp với Network
+  - Tạo các thông báo lỗi rõ ràng
+  - Đặt logging hợp lý
