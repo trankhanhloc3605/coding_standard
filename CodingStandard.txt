@@ -1,30 +1,192 @@
-1.	**Mục đích**
-2.	**Cấu trúc của source file**
-  2.1.	Trình tự trong file
-  2.2.	File header comment
-  2.3.	Trình tự của câu lệnh import
-3.	**Code Format** 
-  3.1.	Dấu ngoặc nhọn Brackets {}
-  3.2.	Dấu ngoặc đơn Round brackets ()
-  3.3.	Spaces
-  3.4.	Comma (Dấu phẩy)
-  3.5.	Lược bỏ return (Implicit return(return ngầm hiểu))
-4.	**Quy tắc đặt tên** 
-  4.1.	Type parameters for classes, structs, enums, protocols, and generics
-  4.2.	case của Biến số・Hằng số・Method・enum
-  4.3.	Từ viết tắc của chữ đầu
-  4.4.	Khoảng cách name và nest
-  4.5.	Resource file naming conventions
-5.	**Access control**
-6.	**Class** 
-7.	**Property**
-8.	**Khai báo biến số・Hằng số**
-9.	**Type** 
-  9.1.	Định nghĩa type và Suy luận type
-  9.2.	Syntax sugar
-  9.3.	Sử dụng Swift native type
-10.	**Method**
-11.	**Nesting**
-12.	**Closures**
-13.	**Enum**
-14.	**Comment** 
+- Mục đích
+- Cấu trúc của source file
+  + Trình tự trong file
+  + File header comment
+- Code Format
+  + Thụt lề
+  + Dấu ngoặc nhọn
+  + Dấu ngoặc đơn
+  + Khoảng trắng
+  + Dòng trống
+  + Lược bỏ return
+  + Độ dài dòng
+- Quy tắc đặt tên 
+  + Classes, structs, enums, protocol and generics
+  + Variables, methods
+  + Resources
+- Property
+- Khai báo biến số・Hằng số
+Kiểu 
+	Định nghĩa kiểu và suy luận kiểu
+Enums
+Closures
+Comments
+Errors
+
+1. Mục đích:
+  - Đảm bảo tính nhất quán
+  - Nâng cao tính dễ đọc
+  - Dễ dàng bảo trì
+2. Cấu trúc của source file
+  2.1. Trình tự trong file
+    // import
+    import Foundation
+    
+    // Class - Struct - Enum
+    class SampleClass {
+      // Type Alias
+      
+      // Enum & Struct
+      
+      // Property
+      // open -> public -> internal -> fileprivate -> private
+      
+      // Method
+      // open -> public -> internal -> fileprivate -> private
+    }
+    
+    // Extension
+    extension SampleClass {
+      // Method
+      // open -> public -> internal -> fileprivate -> private
+    }
+
+  2.2. File header comment
+    - Sử dụng template được quy định
+    Ví dụ:
+      //
+      // <FileName>.swift and describe this file
+      //
+
+3. Code Format
+  3.1. Thụt lề
+    - Sử dụng spaces để thụt lề, số lượng spaces là 4
+  3.2. Dấu ngoặc nhọn
+    - Dấu ngoặc nhọn của khối được đặt trên các dòng mới 
+    và ở cùng mức độ thụt lề với dòng chứa if và else
+    Ví dụ:
+    GOOD:
+      func div(numberA: Double, numberB: Double) -> Double {
+        if numberB == 0 {
+          return 0.0
+        }
+        return numberA / numberB
+      }
+    
+    BAD:
+      func div(numberA: Double, numberB: Double) -> Double 
+      {
+        if numberB == 0 
+        {
+          return 0.0
+        }
+        return numberA / numberB
+      }
+
+  3.3. Dấu ngoặc đơn
+    - Không được sử dụng () khoanh vùng tổng thể biểu thức điều kiện như if, guard, while, switch ,v.v…
+    Ví dụ:
+    GOOD:
+      if (x == 0 || y == 1) && z == 2 {
+        print("Good")
+      }
+    
+    BAD:
+      if ((x == 0 || y == 1) && z == 2) {
+        print("Bad")
+      }
+
+  3.4. Khoảng trắng
+    - Trước sau ngoặc nhọn hoặc ngoặc kép thì phải đặt 1 white space
+    - Trước sau → của giá trị trả về của method thì phải đặt 1 white space
+    - Trước dấu chấm câu thì không thêm white space, sau thì phải thêm 1 white space (ngoại trừ toán tử bậc 3)
+    - Trước dấu phẩy thì không thêm white space, sau dấu phẩy thì phải thêm 1 white space
+    -	Khi implement toán tử, sau toán tử thì phải đặt 1 white space
+
+    Ví dụ:
+    GOOD:
+      if x == 0 && y == 1 && z == 2 {
+        print("Good")
+      }
+    
+    BAD:
+      if x==0 && y==1 && z == 2{
+        print("Bad")
+      }
+
+  3.5. Dòng trống
+    - Phân biệt các block trong 1 file với nhau
+    Ví dụ:
+    GOOD:
+      private var numberA = 0
+      private var numberB = 0
+
+      function getNumberA() -> Int {
+        numberA
+      }
+      
+    BAD:
+      private var numberA = 0
+      private var numberB = 0
+      function getNumberA() -> Int {
+        numberA
+      }
+
+  3.6. Lược bỏ return
+    - Trường hợp hàm số chỉ là return giá trị, thì lược bỏ return
+    Ví dụ:
+    GOOD:
+      func greeting(_ person: String) -> String {
+        "Hi, \(person)!"
+      }
+      
+    BAD:
+      func greeting(_ person: String) -> String {
+        return "Hi, \(person)!"
+      }
+
+  3.7. Độ dài dòng
+    - Độ dài dòng cho phép của một dòng là 120
+4. Quy tắc đặt tên
+  4.1. Classes, structs, enums, protocol and generics
+    - Sử dụng CamelCase
+    - Đặt tên có nghĩa và đúng business
+    - Sử dụng hậu tố để đặt tên
+    Ví dụ:
+      HomeView -> View
+      HomeViewModel -> ViewModel
+
+  4.2. Variables, methods
+    - Sử dụng camelCase
+    - Đặt tên có nghĩa và đúng business
+    - Sử dụng tiền tố để đặt tên
+    Ví dụ:
+      isEnable
+      hasPermission -> sử dụng tiền tố has và is cho biến Bool
+
+  4.3. Resources
+    - Đặt tên có nghĩa và đúng business
+    - Sử dụng snake_case
+    Ví dụ:
+      "home_title": "Home" -> Localization
+      icon_home -> Asset name
+5. Property
+  - Tại property mà có thể đọc từ external nhưng không muốn cho write thì phải dùng private(set)
+  - Đối với Computed Property, thì phải lược bỏ get khi có thể lược bỏ
+  Ví dụ:
+  GOOD:
+  var totalCost: Int {
+      items.reduce(0) { partialResult, item in
+          partialResult + item.cost
+      }
+  }
+
+  BAD:
+  var totalCost: Int {
+    get {
+          items.reduce(0) { partialResult, item in
+              partialResult + item.cost
+          }
+      }
+  }
+
