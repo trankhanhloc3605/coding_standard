@@ -247,18 +247,18 @@
 	/// - Parameter: A boolean as input
 	/// - Return: A description
 	function getDescription(isMatching: Bool) -> String {
-		if isMatching {
-			return AppConstant.previousText
-		}
+	    if isMatching {
+		return AppConstant.previousText
+	    }
 	    return AppConstant.previousText + description
 	}
 
 	BAD:
 	// getDescription
 	function getDescription(isMatching: Bool) -> String {
-		if isMatching {
-			return AppConstant.previousText
-		}
+	    if isMatching {
+		return AppConstant.previousText
+	    }
 	    return AppConstant.previousText + description
 	}
 
