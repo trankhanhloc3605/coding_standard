@@ -204,12 +204,23 @@
 
 7. Enum
 	- Khi có thể lược bỏ type name thì phải lược bỏ
+	- Rút gon enum nếu không có giá trị gì đặc biệt
 	Ví dụ:
 	GOOD:
 	  user.status = .guest
+
+	  enum Status {
+	      case open, inprogress, close
+	  }
 	 
 	 BAD:
 	   user.status = UserStatus.guest
+
+	   enum Status {
+	      case open
+		  case inprogress
+		  case close
+	  }
 
 8. Closure
   - Trường hợp chỉ có 1 closure là argument, thì phải sử dụng Trailing Closure
